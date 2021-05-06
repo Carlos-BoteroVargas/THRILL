@@ -6,7 +6,6 @@ import { getPosts, getPost, createPost, updatePost, deletePost, likePost } from 
 const router = express.Router();
 import auth from '../middleware/auth.js';
 
-
 // ! The entire operation to change/add functionalities starts here:
 // ? Now off to the controllers
 
@@ -19,6 +18,7 @@ router.post('/', auth, createPost);
 
 // -> to update Posts
 router.patch('/:id', auth, updatePost);
+router.get('/:id', getPost);
 
 // -> to delete Posts
 router.delete('/:id', auth, deletePost);
