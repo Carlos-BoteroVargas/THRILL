@@ -1,8 +1,11 @@
 import express from 'express';
 
-import { getPosts, createPosts, updatePost, deletePost, likePost } from '../controllers/posts.js';
+import { getPosts, getPost, createPost, updatePost, deletePost, likePost } from '../controllers/posts.js';
 
+// ! Step 5 to create users. coming from middleware, we're are all set!
 const router = express.Router();
+import auth from '../middleware/auth.js';
+
 
 // ! The entire operation to change/add functionalities starts here:
 // ? Now off to the controllers
@@ -12,15 +15,15 @@ const router = express.Router();
 router.get('/', getPosts);
 
 // -> to create Posts
-router.post('/', createPosts);
+router.post('/', auth, createPost);
 
 // -> to update Posts
-router.patch('/:id', updatePost);
+router.patch('/:id', auth, updatePost);
 
 // -> to delete Posts
-router.delete('/:id', deletePost);
+router.delete('/:id', auth, deletePost);
 
 // -> to patch Posts
-router.patch('/:id/likePost', likePost);
+router.patch('/:id/likePost', auth, likePost);
 
 export default router;
